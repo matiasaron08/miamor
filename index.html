@@ -33,9 +33,9 @@
       margin:0;
       color:var(--cream);
       background:
-        radial-gradient(circle at 10% 15%, rgba(247,198,90,.18), transparent 26%),
+        radial-gradient(circle at 10% 15%, rgba(253, 219, 24, 0.719), transparent 26%),
         radial-gradient(circle at 80% 30%, rgba(216,155,31,.14), transparent 24%),
-        linear-gradient(140deg, var(--bg) 0%, #120d09 48%, #1d180f 100%);
+        linear-gradient(140deg, var(--bg) 0%, #a3734c 48%, #1d180f 100%);
       font-family:Montserrat,system-ui,sans-serif;
       overflow-x:hidden;
     }
@@ -363,6 +363,10 @@
 </head>
 
 <body>
+  <audio id="loveSong" preload="auto" loop autoplay muted>
+    <source src="assets/cancion.mp3" type="audio/mpeg">
+  </audio>
+
   <div class="grain"></div>
   <div class="petals" aria-hidden="true" id="petals"></div>
 
@@ -391,10 +395,10 @@
   <main>
     <section>
       <div class="wrap">
-        <div class="section-kicker reveal">Para María Victoria Blus</div>
+        <div class="section-kicker reveal">Para Victoria</div>
         <h2 class="section-title reveal">Mi amor,</h2>
         <div class="letter reveal">
-          <p class="saludo">María Victoria...</p>
+          <p class="saludo">Vicky...</p>
           <p>Hoy cumplimos <strong>7 años</strong>.Siete años desde aquel 21 de septiembre de 2019 en el que empezamos esta historia. Nunca imaginé que ibas a convertirte en el amor de mi vida.</p>
           <p>Cuando miro para atrás, no pienso solamente en los años que pasaron. Pienso en todas esas pequeñas cosas que hicieron que estos años fueran nuestros.</p>
           <p>Aunque nos quejamos de que somos ermitaños, amo cada minuto que paso con vos. Viendo series, cocinando, jugando LoL... Con saber que estás ahí, yo soy feliz.</p>
@@ -556,6 +560,24 @@
   </main>
 
   <script>
+    const loveSong = document.getElementById('loveSong');
+
+    const startSong = () => {
+      if (!loveSong) return;
+      loveSong.volume = 0.5;
+      loveSong.muted = false;
+      loveSong.play().catch(() => {
+        loveSong.muted = true;
+      });
+    };
+
+    setTimeout(() => {
+      startSong();
+    }, 5000);
+
+    document.addEventListener('pointerdown', startSong, { once: true });
+    document.addEventListener('keydown', startSong, { once: true });
+
     // Pétalos suaves
     const petals = document.getElementById('petals');
     for(let i=0;i<22;i++){
